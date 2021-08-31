@@ -1,0 +1,12 @@
+# some type of files
+*.csv
+*.xlsx
+*.docx
+*.png
+*.idea
+# forders
+motion/
+results/
+slides/
+display/
+
