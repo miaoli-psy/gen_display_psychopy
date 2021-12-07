@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*- 
-"""
-Project: create_display_psychopy
-Creator: Miao
-Create time: 2021-11-30 11:41
-IDE: PyCharm
-Introduction:
-"""
-import ast
 import random
+import ast
 
 
 def get_position_list(df, col_name):
