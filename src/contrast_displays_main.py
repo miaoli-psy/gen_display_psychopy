@@ -20,14 +20,30 @@ if __name__ == '__main__':
     # list excel sheets
     sheet_list = displays_xls.sheet_names
 
+    # TODO
+    # sheet_name = "ref"
+    # sheet_name = "stim"
+    sheet_name = "subtitizing"
+
     # read displays info into df
     displays_df_list = [pd.read_excel(displays_xls, sheet_name) for sheet_name in sheet_list]
-    display = displays_df_list[0]
+    indx = sheet_list.index(sheet_name)
+    display = displays_df_list[indx]
 
     # central discs
     all_posis = get_position_list(display, "allposis")
-    central_posis = get_position_list(display, "centralposis")
-    extra_posis = get_position_list(display, "extraposis")
+    if sheet_name == "stim":
+        central_posis = get_position_list(display, "centralposis")
+        extra_posis = get_position_list(display, "extraposis")
+    elif sheet_name == "subtitizing" or sheet_name == "ref":
+        central_posis = list()
+        extra_posis = list()
+        for displays in all_posis:
+            cen = select_random_half(displays)
+            extr = get_diff_between_2_lists(displays, cen)
+
+            central_posis.append(cen)
+            extra_posis.append(extr)
 
     disk_radius = 4.57  # TODO
     contrast = False
@@ -73,7 +89,7 @@ if __name__ == '__main__':
 
         win.flip()
         win.getMovieFrame()
-        win.saveMovieFrames('../output/contrast%s.png' % (index + 1))
+        win.saveMovieFrames('../output/contrastsub%s.png' % (index + 1))
     win.close()
 
     # contrast ref displays

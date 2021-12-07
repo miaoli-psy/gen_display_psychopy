@@ -20,18 +20,24 @@ if __name__ == '__main__':
 
     # list excel sheets
     sheet_list = displays_xls.sheet_names
+    # TODO
+    # sheet_name = "ref"
+    # sheet_name = "stim"
+    sheet_name = "subtitizing"
 
     # read displays info into df
     displays_df_list = [pd.read_excel(displays_xls, sheet_name) for sheet_name in sheet_list]
-    display = displays_df_list[0]
+    indx = sheet_list.index(sheet_name)
+    display = displays_df_list[indx]
 
     # central discs
     all_posis = get_position_list(display, "allposis")
-    central_posis = get_position_list(display, "centralposis")
-    extra_posis = get_position_list(display, "extraposis")
+    if sheet_name == "stim":
+        central_posis = get_position_list(display, "centralposis")
+        extra_posis = get_position_list(display, "extraposis")
 
     disk_radius = 4.57  # TODO
-    color = disc_color_black
+    color = disc_color_white
 
     # monitor specifications
     monsize = [1920, 1080]
@@ -87,5 +93,5 @@ if __name__ == '__main__':
         win.flip()
 
         win.getMovieFrame()
-        win.saveMovieFrames('../output/%s%s.png' % (color, index + 1))
+        win.saveMovieFrames('../output/%ssub%s.png' % (color, index + 1))
     win.close()
