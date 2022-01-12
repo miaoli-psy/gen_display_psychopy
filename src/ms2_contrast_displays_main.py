@@ -22,8 +22,8 @@ if __name__ == '__main__':
     sheet_list = displays_xls.sheet_names
 
     # TODO
-    sheet_name = "ref"
-    # sheet_name = "stim"
+    # sheet_name = "ref"
+    sheet_name = "stim"
     # sheet_name = "subtitizing"
 
     # read displays info into df
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
         win.flip()
         win.getMovieFrame()
-        win.saveMovieFrames('../output/contrastsub%s.png' % (index + 1))
+        win.saveMovieFrames('../output/contrast%s%s.png' % (sheet_name, (index + 1)))
     win.close()
 
     # contrast ref displays
