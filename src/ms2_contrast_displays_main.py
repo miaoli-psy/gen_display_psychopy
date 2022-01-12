@@ -15,15 +15,16 @@ if __name__ == '__main__':
     # read file
     path = "../displays/"
     filename = "displays.xlsx"
+
     displays_xls = pd.ExcelFile(path + filename, engine = "openpyxl")
 
     # list excel sheets
     sheet_list = displays_xls.sheet_names
 
     # TODO
-    # sheet_name = "ref"
+    sheet_name = "ref"
     # sheet_name = "stim"
-    sheet_name = "subtitizing"
+    # sheet_name = "subtitizing"
 
     # read displays info into df
     displays_df_list = [pd.read_excel(displays_xls, sheet_name) for sheet_name in sheet_list]
@@ -81,6 +82,10 @@ if __name__ == '__main__':
             trgt_disk_b.draw()
             trgt_disk_w.setPos(extra_posis[index][j])
             trgt_disk_w.draw()
+            # don't miss the extra disc when total number is odd
+            if len(extra_posis[index]) > len(central_posi):
+                trgt_disk_w.setPos(extra_posis[index][-1])
+                trgt_disk_w.draw()
 
         # fixation
         fixation = visual.TextStim(win, text = '+', bold = True, color = fix_fillcolor)
